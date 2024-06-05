@@ -1,6 +1,56 @@
+body {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #EDEDED;
+}
+
 header {
     background-image: url('../assets/img/lampos-aritonang.png');
     background-size: cover;
     background-position: center;
-    color: white;
+    width: 1440px;
+    height: 667px;
+}
+
+.lead {
+    text-align: center;
+    font-family: Anton;
+    font-size: 44px;
+    color: #FFD15B;
+}
+
+.badge {
+    color: black;
+    border-radius: 14px;
+    background-color: #FFD15B;
+    padding: 7px 15px;
+}
+
+.card {
+    width: 380px;
+    height: auto;
+    font-size: 14px;
+    border-bottom-left-radius: 21px;
+    border-bottom-right-radius: 21px;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.card-img-top {
+    width: 380px;
+    height: 253px;
+    object-fit: cover;
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-family: Anton;
+}
+
+.card-body p {
+    font-family: manrope;
 }
