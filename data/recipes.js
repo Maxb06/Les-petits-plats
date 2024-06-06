@@ -1519,7 +1519,8 @@ export const recipes = [
                 "quantity": 3
             },
             {
-                "ingredient": "Citron"
+                "ingredient": "Citron",
+                "quantity": 2
             }
         ],
         "time": 50,
