@@ -1,4 +1,4 @@
-export function createRecipeCard(recipe) {
+export function templateRecipe(recipe) {
     const { name, ingredients, description, image, time } = recipe;
 
     const recipeCard = document.createElement('div');
@@ -44,7 +44,7 @@ export function createRecipeCard(recipe) {
         ingredientStrong.textContent = ingredient.ingredient;
 
         ingredientP.appendChild(ingredientStrong);
-        ingredientP.append(`: ${ingredient.quantity || ''} ${ingredient.unit || ''}`);
+        ingredientP.append(`${ingredient.quantity || ''} ${ingredient.unit || ''}`);
 
         ingredientsDiv.appendChild(ingredientP);
     });
