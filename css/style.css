@@ -1,16 +1,32 @@
+
 body {
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     background-color: #EDEDED;
 }
+/* Header */
 
 header {
     background-image: url('../assets/img/lampos-aritonang.png');
     background-size: cover;
     background-position: center;
-    width: 1440px;
     height: 667px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header img {
+    position: absolute;
+    top: 50px;
+    left: 69px;
 }
 
 .lead {
@@ -18,13 +34,76 @@ header {
     font-family: Anton;
     font-size: 44px;
     color: #FFD15B;
+    width: 55%;
+    margin-bottom: 30px;
 }
 
-.badge {
-    color: black;
-    border-radius: 14px;
-    background-color: #FFD15B;
-    padding: 7px 15px;
+#search {
+    width: 56vw;
+    height: 72px;
+    border-radius: 11px;
+    padding-left: 35px;
+}
+
+.search-text {
+    position: relative;
+}
+
+.loop {
+    position: absolute;
+    top: 13%; 
+    left: 93%;
+    cursor: pointer;
+}
+
+/* Sort Selectors */
+
+#sortSelect {
+    width: 60%;
+    margin-bottom: 0 !important;
+}
+
+#sortSelect .btn {
+    border-radius: 11px;
+    background-color: #FFF;
+    margin-right: 66px;
+    color: var(--Black, #1B1B1B);
+    font-family: Manrope;
+    font-weight: 500;
+    padding: 17px 16px;
+}
+
+#sortSelect i {
+    margin-left: 63px;
+}
+
+#totalRecipes {
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-family: Anton;
+    font-size: 21px;
+}
+
+/* Gallery */
+
+.my-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+} 
+
+#recipes-container {
+    margin-top: 55px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.recipe-card {
+    width: 382px;
+    padding: 0;
 }
 
 .card {
@@ -53,4 +132,26 @@ header {
 
 .card-body p {
     font-family: manrope;
+}
+
+.ingredients {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 180px;
+}
+
+.ingredients p {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    color: #1B1B1B;
+    border-radius: 14px;
+    background-color: #FFD15B;
+    padding: 8px 13px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
