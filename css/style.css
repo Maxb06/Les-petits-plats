@@ -1,3 +1,4 @@
+/* Common */
 
 body {
     max-width: 1440px;
@@ -86,7 +87,7 @@ header img {
     font-size: 21px;
 }
 
-/* Gallery */
+/* Cards & Gallery */
 
 .my-4 {
     padding-left: 0px;
@@ -108,13 +109,14 @@ header img {
 
 .card {
     width: 380px;
-    height: auto;
+    height: 731px;
     font-size: 14px;
     border-bottom-left-radius: 21px;
     border-bottom-right-radius: 21px;
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
     border-top-left-radius: 21px;
     border-top-right-radius: 21px;
+    margin-bottom: 66px;
 }
 
 .card-img-top {
@@ -125,13 +127,42 @@ header img {
     border-top-right-radius: 21px;
 }
 
+.card-body {
+    padding: 2rem 2rem;
+}
+
 .card-title {
     font-size: 18px;
     font-family: Anton;
+    margin-bottom: 29px;
 }
 
-.card-body p {
+.card-body h2 + p,
+.card-text + p {
+    color: #7A7A7A;
+    font-family: Manrope;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.08px;
+}
+
+.card-text {
+    overflow-y: auto;
+    height: 85px;
+    margin-bottom: 30px;
+    color: #1B1B1B;
     font-family: manrope;
+}
+
+.ingredients {
+    color: #7A7A7A;
+    font-family: Manrope;
+    font-size: 14px;
+}
+
+.ingredients strong {
+    color: #1B1B1B;
+    font-weight: 500;
 }
 
 .ingredients {

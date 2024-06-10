@@ -12,7 +12,7 @@ async function init() {
 }
 
 function displayRecipes(recipes, container) {
-    //container.innerHTML = '';
+    container.innerHTML = '';
     recipes.forEach(recipe => {
         const recipeCard = templateRecipe(recipe);
         container.appendChild(recipeCard);
