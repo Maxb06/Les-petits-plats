@@ -1,6 +1,6 @@
 import { recipes } from '../../data/recipes.js';
 import { templateRecipe } from '../templates/recipeCard.js';
-import { searchRecipes } from '../utils/searchLoop.js';
+import { searchRecipes } from '../utils/searchBar.js';
 
 document.addEventListener('DOMContentLoaded', init);
 
