@@ -747,7 +747,7 @@ export const recipes = [
                 "unit":"grammes"
             },
             {
-                "ingredient": "Viande hachée 1% de matière grasse",
+                "ingredient": "Viande hachée 1% de MG",
                 "quantity": 400,
                 "unit":"grammes"
             },
