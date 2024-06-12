@@ -63,6 +63,7 @@ header img {
     justify-content: center;
     color: #FFF;
     font-size: 1.4rem;
+    cursor: pointer;
 }
 
 .search-text i:hover {
