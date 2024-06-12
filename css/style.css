@@ -50,11 +50,26 @@ header img {
     position: relative;
 }
 
-.loop {
+.search-text button {
     position: absolute;
-    top: 13%; 
-    left: 93%;
-    cursor: pointer;
+    top: 10px;
+    right: 10px;
+    width: 51px;
+    height: 52px;
+    border-radius: 10px;
+    background-color: #1B1B1B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-text i {
+    color: #FFF;
+    font-size: 1.4rem;
+}
+
+.search-text button:hover {
+    background-color: #FFD15B;
 }
 
 /* Sort Selectors */
