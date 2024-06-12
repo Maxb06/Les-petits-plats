@@ -50,7 +50,7 @@ header img {
     position: relative;
 }
 
-.search-text button {
+.search-text i {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -61,15 +61,13 @@ header img {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.search-text i {
     color: #FFF;
     font-size: 1.4rem;
 }
 
-.search-text button:hover {
+.search-text i:hover {
     background-color: #FFD15B;
+    color: #1B1B1B;
 }
 
 /* Sort Selectors */
