@@ -15,5 +15,10 @@ export function searchRecipes(search, recipes) {
             results.push(recipe);
         }
     }
+    
+    if (results.length === 0) {
+        return [`Aucune recette ne contient '${search}'.`];
+    }
+
     return results;
 }

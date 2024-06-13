@@ -34,5 +34,13 @@ function searchInput(event, recipesData, container) {
 
     results = searchRecipes(searchTerm, recipesData);
 
-    displayRecipes(results, container);
+    container.innerHTML = '';
+
+    if (results.length === 1 && typeof results[0] === 'string') {
+        const message = document.createElement('p');
+        message.textContent = results[0];
+        container.appendChild(message);
+    } else {
+        displayRecipes(results, container);
+    }
 }
