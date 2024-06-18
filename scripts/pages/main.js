@@ -37,5 +37,17 @@ function searchInput(event, recipesData, container) {
     }
     
     const results = searchRecipes(searchTerm, recipesData);
-    displayRecipes(results, container);
+
+    if (results.length === 0) {
+        noResultsMessage(container, searchTerm);
+    } else {
+        displayRecipes(results, container);
+    }
+}
+
+function noResultsMessage(container, searchTerm) {
+    container.innerHTML = '';
+    const message = document.createElement('p');
+    message.textContent = `Aucune recette ne contient '${searchTerm}', vous pouvez chercher 'tarte aux pommes', 'poisson', etc.`;
+    container.appendChild(message);
 }
