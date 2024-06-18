@@ -3,10 +3,6 @@ export function searchRecipes(search, recipes) {
     let results = [];
     search = search.toLowerCase();
 
-    if (search.length < 3) {
-        return results;
-    }
-
     for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
         if (recipe.name.toLowerCase().includes(search) ||
@@ -16,9 +12,5 @@ export function searchRecipes(search, recipes) {
         }
     }
     
-    if (results.length === 0) {
-        return [`Aucune recette ne contient '${search}'.`];
-    }
-
     return results;
 }

@@ -30,17 +30,24 @@ function updateTotalRecipes(total) {
 
 function searchInput(event, recipesData, container) {
     const searchTerm = event.target.value;
-    let results;
 
-    results = searchRecipes(searchTerm, recipesData);
+    if (searchTerm.length < 3) {
+        displayRecipes([], container);
+        return;
+    }
+    
+    const results = searchRecipes(searchTerm, recipesData);
 
-    container.innerHTML = '';
-
-    if (results.length === 1 && typeof results[0] === 'string') {
-        const message = document.createElement('p');
-        message.textContent = results[0];
-        container.appendChild(message);
+    if (results.length === 0) {
+        noResultsMessage(container, searchTerm);
     } else {
         displayRecipes(results, container);
     }
+}
+
+function noResultsMessage(container, searchTerm) {
+    container.innerHTML = '';
+    const message = document.createElement('p');
+    message.textContent = `Aucune recette ne contient '${searchTerm}', vous pouvez chercher 'tarte aux pommes', 'poisson', etc.`;
+    container.appendChild(message);
 }
