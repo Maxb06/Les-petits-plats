@@ -123,7 +123,7 @@ header img {
 
 .card {
     width: 380px;
-    height: 731px;
+    min-height: 731px;
     font-size: 14px;
     border-bottom-left-radius: 21px;
     border-bottom-right-radius: 21px;
@@ -160,12 +160,17 @@ header img {
     letter-spacing: 1.08px;
 }
 
-.card-text {
-    overflow-y: auto;
-    height: 85px;
+.card-text { 
+    overflow: hidden;
+    max-height: 85px;
     margin-bottom: 30px;
     color: #1B1B1B;
     font-family: manrope;
+    transition: max-height 800ms ease;
+}
+
+.card-text:hover {
+    max-height: 1000px;
 }
 
 .ingredients {
