@@ -30,7 +30,12 @@ function updateTotalRecipes(total) {
 
 function searchInput(event, recipesData, container) {
     const searchTerm = event.target.value;
-    const results = searchRecipes(searchTerm, recipesData);
 
+    if (searchTerm.length < 3) {
+        displayRecipes([], container);
+        return;
+    }
+    
+    const results = searchRecipes(searchTerm, recipesData);
     displayRecipes(results, container);
 }
