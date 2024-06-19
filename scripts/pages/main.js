@@ -4,6 +4,9 @@ import { searchRecipes } from '../utils/searchBar.js';
 
 document.addEventListener('DOMContentLoaded', init);
 
+/**
+ * Initial function to set up event listeners and display recipes on page load.
+ */
 async function init() {
     const recipesContainer = document.getElementById('recipes-container');
     const recipesData = recipes;
@@ -13,6 +16,12 @@ async function init() {
     document.getElementById('search').addEventListener('input', (event) => searchInput(event, recipesData, recipesContainer));
 }
 
+/**
+ * Display the list of recipes in the specified container.
+ *
+ * @param {Array} recipes - The array of recipe objects to display.
+ * @param {HTMLElement} container - The container element where the recipes will be displayed.
+ */
 function displayRecipes(recipes, container) {
     container.innerHTML = '';
     recipes.forEach(recipe => {
@@ -23,11 +32,23 @@ function displayRecipes(recipes, container) {
     updateTotalRecipes(recipes.length);
 }
 
+/**
+ * Function to update the total number of recipes displayed.
+ *
+ * @param {number} total - The total number of recipes.
+ */
 function updateTotalRecipes(total) {
     const totalRecipesElement = document.getElementById('totalRecipes');
     totalRecipesElement.textContent = `${total} recettes`;
 }
 
+/**
+ * Function to handle the search input event, filter recipes, and display results.
+ *
+ * @param {Event} event - The input event triggered by the search field.
+ * @param {Array} recipesData - The array of recipe objects to search within.
+ * @param {HTMLElement} container - The HTML element where the search results will be displayed.
+ */
 function searchInput(event, recipesData, container) {
     const searchTerm = event.target.value;
 
@@ -45,6 +66,12 @@ function searchInput(event, recipesData, container) {
     }
 }
 
+/**
+ * Function to display a message when no search results are found.
+ *
+ * @param {HTMLElement} container - The HTML element where the message will be displayed.
+ * @param {string} searchTerm - The search term entered by the user.
+ */
 function noResultsMessage(container, searchTerm) {
     container.innerHTML = '';
     const message = document.createElement('p');

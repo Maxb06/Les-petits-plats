@@ -1,3 +1,14 @@
+/**
+ * Function to create a recipe card HTML element.
+ *
+ * @param {Object} recipe - The recipe object containing details for the recipe card.
+ * @param {string} recipe.name - The name of the recipe.
+ * @param {Array} recipe.ingredients - The ingredients used in the recipe.
+ * @param {string} recipe.description - The description of the recipe.
+ * @param {string} recipe.image - The filename of the recipe image.
+ * @param {number} recipe.time - The time required to prepare the recipe, in minutes.
+ * @returns {HTMLElement} - The HTML element representing the recipe card.
+ */
 export function templateRecipe(recipe) {
     const { name, ingredients, description, image, time } = recipe;
 
