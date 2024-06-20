@@ -101,6 +101,27 @@ header img {
     font-size: 21px;
 }
 
+.dropdown-menu.show {
+    display: block;
+}
+
+#ingredientsDropdown {
+    width: 195px;
+    height: 315px;
+    border-radius: 11px;
+    overflow: scroll;
+    
+}
+
+#appliancesDropdown {
+    margin-left: 16%;
+    width: 175px;
+}
+
+#ustensilsDropdown {
+    margin-left: 30.7%;
+}
+
 /* Cards & Gallery */
 
 .my-4 {
@@ -131,6 +152,7 @@ header img {
     border-top-left-radius: 21px;
     border-top-right-radius: 21px;
     margin-bottom: 66px;
+    cursor: pointer;
 }
 
 .card-img-top {
@@ -166,7 +188,7 @@ header img {
     margin-bottom: 30px;
     color: #1B1B1B;
     font-family: manrope;
-    transition: max-height 800ms ease;
+    transition: max-height 500ms ease;
 }
 
 .card-text:hover {
@@ -205,3 +227,4 @@ header img {
     top: 20px;
     right: 20px;
 }
+
