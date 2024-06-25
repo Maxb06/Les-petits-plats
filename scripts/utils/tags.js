@@ -3,25 +3,16 @@ import { displayDropdown } from '../templates/dropdownTemplate.js';
 export function generateDropdown(recipes, type) {
     let items = [];
 
-    recipes.forEach(recipe => {
-        if (type === 'ingredients') {
-            recipe.ingredients.forEach(ingredient => {
-                if (!items.includes(ingredient.ingredient)) {
-                    items.push(ingredient.ingredient);
-                }
-            });
-        } else if (type === 'appliances') {
-            if (!items.includes(recipe.appliance)) {
-                items.push(recipe.appliance);
-            }
-        } else if (type === 'ustensils') {
-            recipe.ustensils.forEach(ustensil => {
-                if (!items.includes(ustensil)) {
-                    items.push(ustensil);
-                }
-            });
-        }
-    });
+    if (type === 'ingredients') {
+        items = recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient));
+    } else if (type === 'appliances') {
+        items = recipes.map(recipe => recipe.appliance);
+    } else if (type === 'ustensils') {
+        items = recipes.flatMap(recipe => recipe.ustensils);
+    }
+
+    // Filtre les doublons
+    items = [...new Set(items)];
 
     displayDropdown(type, items);
 }
