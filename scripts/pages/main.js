@@ -84,53 +84,21 @@ function noResultsMessage(container, searchTerm) {
 
 
 function dropdowns(recipesData) {
-const ingredientButton = document.getElementById('ingredientButton');
-    const applianceButton = document.getElementById('applianceButton');
-    const ustensilButton = document.getElementById('ustensilButton');
-
-    ingredientButton.addEventListener('click', () => {
-        const dropdown = document.getElementById('ingredientsDropdown');
-        dropdown.classList.toggle('show');
-        if (dropdown.classList.contains('show')) {
-            generateDropdown(recipesData, 'ingredients');
-        }
-    });
-
-    applianceButton.addEventListener('click', () => {
-        const dropdown = document.getElementById('appliancesDropdown');
-        dropdown.classList.toggle('show');
-        if (dropdown.classList.contains('show')) {
-            generateDropdown(recipesData, 'appliances');
-        }
-    });
-
-    ustensilButton.addEventListener('click', () => {
-        const dropdown = document.getElementById('ustensilsDropdown');
-        dropdown.classList.toggle('show');
-        if (dropdown.classList.contains('show')) {
-            generateDropdown(recipesData, 'ustensils');
-        }
-    })
-};
-
-
-
-/*
-function dropdowns(recipesData) {
-    const dropdownButtons = [
-        { buttonId: 'ingredientButton', dropdownId: 'ingredientsDropdown', type: 'ingredients' },
-        { buttonId: 'applianceButton', dropdownId: 'appliancesDropdown', type: 'appliances' },
-        { buttonId: 'ustensilButton', dropdownId: 'ustensilsDropdown', type: 'ustensils' }
+    const dropdownToggles = [
+        { toggleId: 'ingredientDropdownToggle', dropdownId: 'ingredientsDropdown', type: 'ingredients' },
+        { toggleId: 'applianceDropdownToggle', dropdownId: 'appliancesDropdown', type: 'appliances' },
+        { toggleId: 'ustensilDropdownToggle', dropdownId: 'ustensilsDropdown', type: 'ustensils' }
     ];
 
-    dropdownButtons.forEach(({ buttonId, dropdownId, type }) => {
-        const button = document.getElementById(buttonId);
-        button.addEventListener('click', () => {
+    dropdownToggles.forEach(({ toggleId, dropdownId, type }) => {
+        const toggle = document.getElementById(toggleId);
+        toggle.addEventListener('click', () => {
             const dropdown = document.getElementById(dropdownId);
             dropdown.classList.toggle('show');
             if (dropdown.classList.contains('show')) {
+                dropdown.style.marginTop = "-10px";
                 generateDropdown(recipesData, type);
             }
         });
     });
-}*/
+}

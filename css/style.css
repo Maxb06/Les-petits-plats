@@ -50,7 +50,7 @@ header img {
     position: relative;
 }
 
-.search-text i {
+.container .search-text i {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -66,7 +66,7 @@ header img {
     cursor: pointer;
 }
 
-.search-text i:hover {
+.container .search-text i:hover {
     background-color: #FFD15B;
     color: #1B1B1B;
 }
@@ -74,26 +74,28 @@ header img {
 /* Sort Selectors */
 
 #sortSelect {
-    width: 60%;
-    margin-bottom: 0 !important;
+    width: 70%;
+    display: flex;
 }
 
 #sortSelect .btn {
     border-radius: 11px;
     background-color: #FFF;
-    margin-right: 66px;
-    color: var(--Black, #1B1B1B);
+    color: #1B1B1B;
     font-family: Manrope;
     font-weight: 500;
     padding: 17px 16px;
+    margin-right: 66px;
+    border: none;
+    width: 195px;
 }
 
-#sortSelect i {
-    margin-left: 63px;
+.dropdown i {
+    margin-left: 60px;
 }
 
 #totalRecipes {
-    width: 40%;
+    width: 30%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -101,25 +103,30 @@ header img {
     font-size: 21px;
 }
 
-.dropdown-menu.show {
-    display: block;
-}
-
-#ingredientsDropdown {
+.dropdown-menu {
+    border: none;
     width: 195px;
     height: 315px;
-    border-radius: 11px;
-    overflow: scroll;
-    
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-#appliancesDropdown {
-    margin-left: 16%;
-    width: 175px;
+/* Hide tags scrollbars */
+.dropdown-menu::-webkit-scrollbar {
+    display: none;
+}
+.dropdown-menu {
+    -ms-overflow-style: none;  /* IE & Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-#ustensilsDropdown {
-    margin-left: 30.7%;
+#ingredientsDropdown .search-text input {
+    width: calc(100% - 2rem);
+}
+
+#ingredientsDropdown .search-text i {
+    color: #7A7A7A;
+    background-color: #FFF;
 }
 
 /* Cards & Gallery */

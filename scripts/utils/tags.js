@@ -1,3 +1,5 @@
+import { displayDropdown } from '../templates/dropdownTemplate.js';
+
 export function generateDropdown(recipes, type) {
     let items = [];
 
@@ -24,15 +26,4 @@ export function generateDropdown(recipes, type) {
     displayDropdown(type, items);
 }
 
-function displayDropdown(type, items) {
-    const dropdown = document.getElementById(`${type}Dropdown`);
-    dropdown.innerHTML = '';
-
-    items.forEach(item => {
-        const listItem = document.createElement('div');
-        listItem.textContent = item;
-        listItem.classList.add('dropdown-item');
-        dropdown.appendChild(listItem);
-    });
-}
 
