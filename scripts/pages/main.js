@@ -92,13 +92,20 @@ function dropdowns(recipesData) {
 
     dropdownToggles.forEach(({ toggleId, dropdownId, type }) => {
         const toggle = document.getElementById(toggleId);
+        const dropdown = document.getElementById(dropdownId);
+        let isOpen = false;
+
         toggle.addEventListener('click', () => {
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('show');
-            if (dropdown.classList.contains('show')) {
-                dropdown.style.marginTop = "-10px";
+            const chevronIcon = toggle.querySelector('i');
+            if (isOpen) {
+                dropdown.classList.remove('show');
+                chevronIcon.classList.remove('rotate');
+            } else {
+                dropdown.classList.add('show');
+                chevronIcon.classList.add('rotate');
                 generateDropdown(recipesData, type);
             }
+            isOpen = !isOpen;
         });
     });
 }

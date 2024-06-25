@@ -33,7 +33,7 @@ header img {
 .lead {
     text-align: center;
     font-family: Anton;
-    font-size: 44px;
+    font-size: 2.75rem;
     color: #FFD15B;
     width: 55%;
     margin-bottom: 30px;
@@ -50,7 +50,7 @@ header img {
     position: relative;
 }
 
-.container .search-text i {
+.search-text i {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -66,7 +66,7 @@ header img {
     cursor: pointer;
 }
 
-.container .search-text i:hover {
+.search-text i:hover {
     background-color: #FFD15B;
     color: #1B1B1B;
 }
@@ -92,6 +92,11 @@ header img {
 
 .dropdown i {
     margin-left: 60px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown i.rotate {
+    transform: rotate(180deg);
 }
 
 #totalRecipes {
@@ -109,24 +114,41 @@ header img {
     height: 315px;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-/* Hide tags scrollbars */
-.dropdown-menu::-webkit-scrollbar {
-    display: none;
-}
-.dropdown-menu {
     -ms-overflow-style: none;  /* IE & Edge */
-    scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none;  /* Firefox */  
+    padding-top: 0; 
 }
 
-#ingredientsDropdown .search-text input {
+.dropdown-menu .search-text {
+    position: sticky;
+    top: 0;
+    background-color: #FFF;
+    padding-bottom: 20px;
+    padding-top: 7px;
+}
+
+.dropdown-menu .search-text input {
     width: calc(100% - 2rem);
+    margin-left: 16px;  
 }
 
-#ingredientsDropdown .search-text i {
+.dropdown-menu .search-text i {
     color: #7A7A7A;
     background-color: #FFF;
+    width: 14px;
+    height: 13.5px;
+    font-size: 14px; 
+    margin-top: 10px;
+    margin-right: 16px;  
+}
+
+.dropdown-item {
+    font-size: 14px;
+    font-family: 'Manrope';
+}
+
+.show {
+    margin-top: -10px;
 }
 
 /* Cards & Gallery */
