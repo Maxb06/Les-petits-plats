@@ -151,6 +151,10 @@ header img {
     margin-top: -10px;
 }
 
+.dropdown-menu.show {
+    height: auto;
+}
+
 /* Cards & Gallery */
 
 .my-4 {

@@ -12,6 +12,7 @@ async function init() {
     const recipesContainer = document.getElementById('recipes-container');
     const recipesData = recipes;
 
+    window.recipes = recipesData;
     displayRecipes(recipesData, recipesContainer);
 
     document.getElementById('search').addEventListener('input', (event) => searchInput(event, recipesData, recipesContainer));
@@ -25,7 +26,7 @@ async function init() {
  * @param {Array} recipes - The array of recipe objects to display.
  * @param {HTMLElement} container - The container element where the recipes will be displayed.
  */
-function displayRecipes(recipes, container) {
+export function displayRecipes(recipes, container) {
     container.innerHTML = '';
     recipes.forEach(recipe => {
         const recipeCard = templateRecipe(recipe);
@@ -82,7 +83,11 @@ function noResultsMessage(container, searchTerm) {
     container.appendChild(message);
 }
 
-
+/**
+ * Function to set up dropdown event listeners for the specified types.
+ *
+ * @param {Array} recipesData - The array of recipe objects.
+ */
 function dropdowns(recipesData) {
     const dropdownToggles = [
         { toggleId: 'ingredientDropdownToggle', dropdownId: 'ingredientsDropdown', type: 'ingredients' },
@@ -96,6 +101,12 @@ function dropdowns(recipesData) {
         let isOpen = false;
 
         toggle.addEventListener('click', () => {
+            dropdownToggles.forEach(({ dropdownId: otherDropdownId }) => {
+                if (dropdownId !== otherDropdownId) {
+                    document.getElementById(otherDropdownId).classList.remove('show');
+                }
+            });
+
             const chevronIcon = toggle.querySelector('i');
             if (isOpen) {
                 dropdown.classList.remove('show');
