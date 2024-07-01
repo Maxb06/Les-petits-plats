@@ -111,7 +111,7 @@ header img {
 .dropdown-menu {
     border: none;
     width: 195px;
-    height: 315px;
+    max-height: 315px;
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;  /* IE & Edge */
@@ -149,10 +149,6 @@ header img {
 
 .show {
     margin-top: -10px;
-}
-
-.dropdown-menu.show {
-    height: auto;
 }
 
 /* Cards & Gallery */
