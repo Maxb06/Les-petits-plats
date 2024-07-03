@@ -13,6 +13,7 @@ async function init() {
     const recipesData = recipes;
 
     window.recipes = recipesData;
+    setupSearchClear();
     displayRecipes(recipesData, recipesContainer);
 
     document.getElementById('search').addEventListener('input', (event) => searchInput(event, recipesData, recipesContainer));
@@ -118,5 +119,20 @@ function dropdowns(recipesData) {
             }
             isOpen = !isOpen;
         });
+    });
+}
+
+function setupSearchClear() {
+    const searchInput = document.getElementById('search');
+    const searchClear = document.getElementById('search-clear');
+
+    searchInput.addEventListener('input', () => {
+        searchClear.style.display = searchInput.value ? 'inline' : 'none';
+    });
+
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        displayRecipes(recipes, document.getElementById('recipes-container'));
     });
 }

@@ -21,8 +21,14 @@ export function displayDropdown(type, items) {
     const searchIcon = document.createElement('i');
     searchIcon.classList.add('fa-solid', 'fa-magnifying-glass');
 
+    const searchClear = document.createElement('i');
+    searchClear.classList.add('fa-solid', 'fa-times', 'search-clear');
+    searchClear.style.display = 'none';
+    searchClear.id = `${type}Clear`;
+
     searchBarContainer.appendChild(searchBar);
     searchBarContainer.appendChild(searchIcon);
+    searchBarContainer.appendChild(searchClear);
     dropdown.appendChild(searchBarContainer);
 
     const listContainer = document.createElement('div');
@@ -40,6 +46,16 @@ export function displayDropdown(type, items) {
     });
 
     searchBar.addEventListener('input', (event) => filterDropdownItems(event, items, listContainer));
+
+    searchBar.addEventListener('input', () => {
+        searchClear.style.display = searchBar.value ? 'inline' : 'none';
+    });
+
+    searchClear.addEventListener('click', () => {
+        searchBar.value = '';
+        searchClear.style.display = 'none';
+        displayDropdown(type, items);
+    });
 }
 
 /**

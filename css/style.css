@@ -48,6 +48,12 @@ header img {
 
 .search-text {
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-text input {
+    width: 100%;
 }
 
 .search-text i {
@@ -57,6 +63,9 @@ header img {
     width: 51px;
     height: 52px;
     border-radius: 10px;
+}
+
+.search-text #search-icon {
     background-color: #1B1B1B;
     display: flex;
     align-items: center;
@@ -66,7 +75,19 @@ header img {
     cursor: pointer;
 }
 
-.search-text i:hover {
+#search-clear {
+    display: inline;
+    color: #7A7A7A;
+    position: absolute;
+    top: 35%;
+    position: absolute;
+    right: 4rem;
+    display: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.search-text #search-icon:hover {
     background-color: #FFD15B;
     color: #1B1B1B;
 }
@@ -110,6 +131,8 @@ header img {
 
 .dropdown-menu {
     border: none;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
     width: 195px;
     max-height: 315px;
     overflow-y: auto;
@@ -117,6 +140,7 @@ header img {
     -ms-overflow-style: none;  /* IE & Edge */
     scrollbar-width: none;  /* Firefox */  
     padding-top: 0; 
+    padding-bottom: 0;
 }
 
 .dropdown-menu .search-text {
@@ -138,8 +162,17 @@ header img {
     width: 14px;
     height: 13.5px;
     font-size: 14px; 
+}
+
+.dropdown-menu .search-text .fa-magnifying-glass {
     margin-top: 10px;
     margin-right: 16px;  
+}
+
+.dropdown-menu .search-text .fa-times {
+    right: 45px;
+    top: 32%;
+    cursor: pointer;
 }
 
 .dropdown-item {
