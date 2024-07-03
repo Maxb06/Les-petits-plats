@@ -145,6 +145,14 @@ header img {
 .dropdown-item {
     font-size: 14px;
     font-family: 'Manrope';
+    cursor: pointer;
+    height: 37px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item:hover {
+    background-color: #FFD15B;
 }
 
 .show {
