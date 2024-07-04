@@ -1,4 +1,4 @@
-import { displayDropdown } from '../templates/dropdownTemplate.js';
+import { displayDropdown } from '../utils/dropdown.js';
 import { displayRecipes } from '../pages/main.js';
 
 /**
@@ -44,30 +44,75 @@ export function generateDropdown(recipes, type) {
 export function selectTag(event, recipesData, container) {
     const tag = event.target.dataset.tag;
     const type = event.target.dataset.type;
-    const results = filterByTag(recipesData, type, tag);
 
-    displayRecipes(results, container);
+    if (!window.selectedTags[type].includes(tag)) {
+        window.selectedTags[type].push(tag);
+        addTag(tag, type);
+    }
+
+    const filteredRecipes = filterRecipes(recipesData, window.selectedTags);
+
+    displayRecipes(filteredRecipes, container);
+    updateDropdowns(filteredRecipes);
 }
 
 /**
- * Function to filter recipes by a specific tag and type.
+ * Function to filter recipes based on selected tags.
  *
  * @param {Array} recipes - The array of recipe objects.
- * @param {string} type - The type of the tag (ingredients, appliances, ustensils).
- * @param {string} tag - The tag to filter by.
+ * @param {Object} selectedTags - The selected tags for each type.
  * @returns {Array} The array of filtered recipe objects.
  */
-export function filterByTag(recipes, type, tag) {
-    tag = tag.toLowerCase();
-    
+function filterRecipes(recipes, selectedTags) {
     return recipes.filter(recipe => {
-        if (type === 'ingredients') {
-            return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag));
-        } else if (type === 'appliances') {
-            return recipe.appliance.toLowerCase().includes(tag);
-        } else if (type === 'ustensils') {
-            return recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag));
-        }
-        return false;
+        return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
+               selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
+               selectedTags.ustensils.every(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
     });
 }
+
+/**
+ * Function to add a tag element to the UI.
+ *
+ * @param {string} tag - The tag to add.
+ * @param {string} type - The type of the tag (ingredients, appliances, ustensils).
+ */
+function addTag(tag, type) {
+    const tagContainer = document.getElementById('tags-container');
+    const tagElement = document.createElement('div');
+    tagElement.classList.add('tag');
+    tagElement.textContent = tag;
+    tagElement.dataset.tag = tag;
+    tagElement.dataset.type = type;
+
+    const removeIcon = document.createElement('i');
+    removeIcon.classList.add('fa-solid', 'fa-times');
+    removeIcon.addEventListener('click', () => removeTag(tag, type, tagElement));
+
+    tagElement.appendChild(removeIcon);
+    tagContainer.appendChild(tagElement);
+}
+
+/**
+ * Function to remove a tag and update the UI.
+ *
+ * @param {string} tag - The tag to remove.
+ * @param {string} type - The type of the tag (ingredients, appliances, ustensils).
+ * @param {HTMLElement} tagElement - The tag element to remove from the DOM.
+ */
+function removeTag(tag, type, tagElement) {
+    window.selectedTags[type] = window.selectedTags[type].filter(t => t !== tag);
+    tagElement.remove();
+
+    const filteredRecipes = filterRecipes(window.recipes, window.selectedTags);
+    displayRecipes(filteredRecipes, document.getElementById('recipes-container'));
+    updateDropdowns(filteredRecipes);
+}
+
+function updateDropdowns(filteredRecipes) {
+    ['ingredients', 'appliances', 'ustensils'].forEach(type => {
+        const items = getItems(filteredRecipes, type);
+        displayDropdown(type, items);
+    });
+}
+

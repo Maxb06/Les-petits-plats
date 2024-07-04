@@ -94,8 +94,12 @@ header img {
 
 /* Sort Selectors */
 
+#sortContainer {
+    position: relative;
+}
+
 #sortSelect {
-    width: 70%;
+    width: 60%;
     display: flex;
 }
 
@@ -121,7 +125,7 @@ header img {
 }
 
 #totalRecipes {
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -190,6 +194,49 @@ header img {
 
 .show {
     margin-top: -10px;
+}
+
+#tags-container {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 95%;
+    flex-wrap: wrap;
+}
+
+#tags-container .tag {
+    padding: 17px 18px;
+    background-color: #FFD15B;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border-radius: 10px;
+    font-family: Manrope;
+    font-size: 14px;
+}
+
+#tags-container .tag i {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 993px) {
+    #search {
+        width: 100%;
+    }
+    .lead {
+        width: 100%;
+    }
+    #sortSelect {
+        flex-direction: column;
+        gap: 30px;
+        margin-left: 5px;
+    }
+    #sortSelect .btn {
+        margin-right: 0;
+    }
+    #totalRecipes {
+        width: 30%;
+    }
 }
 
 /* Cards & Gallery */
