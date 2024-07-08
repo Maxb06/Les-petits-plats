@@ -109,7 +109,7 @@ function removeTag(tag, type, tagElement) {
     updateDropdowns(filteredRecipes);
 }
 
-function updateDropdowns(filteredRecipes) {
+export function updateDropdowns(filteredRecipes) {
     ['ingredients', 'appliances', 'ustensils'].forEach(type => {
         const items = getItems(filteredRecipes, type);
         displayDropdown(type, items);

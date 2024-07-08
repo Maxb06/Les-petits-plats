@@ -1,7 +1,7 @@
 import { recipes } from '../../data/recipes.js';
 import { templateRecipe } from '../templates/recipeCard.js';
 import { searchRecipes } from '../utils/searchBar.js';
-import { generateDropdown } from '../utils/tags.js';
+import { generateDropdown, updateDropdowns } from '../utils/tags.js';
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -61,6 +61,7 @@ function searchInput(event, recipesData, container) {
 
     if (searchTerm.length < 3) {
         displayRecipes(recipesData, container);
+        updateDropdowns(recipesData);
         return;
     }
 
@@ -70,6 +71,7 @@ function searchInput(event, recipesData, container) {
         noResultsMessage(container, searchTerm);
     } else {
         displayRecipes(results, container);
+        updateDropdowns(results);
     }
 }
 
@@ -103,7 +105,14 @@ function dropdowns(recipesData) {
         const dropdown = document.getElementById(dropdownId);
         let isOpen = false;
 
+        // Initialise les dropdowns une seule fois au chargement de la page
+        if (!dropdown.dataset.initialized) {
+            generateDropdown(recipesData, type);
+            dropdown.dataset.initialized = true;
+        }
+
         toggle.addEventListener('click', () => {
+            // Ferme les autres dropdowns
             dropdownToggles.forEach(({ dropdownId: otherDropdownId }) => {
                 if (dropdownId !== otherDropdownId) {
                     const otherDropdown = document.getElementById(otherDropdownId);
@@ -112,6 +121,7 @@ function dropdowns(recipesData) {
                 }
             });
 
+            // Gere l'ouverture/fermeture du dropdown actuel
             const chevronIcon = toggle.querySelector('i');
             if (isOpen) {
                 dropdown.classList.remove('show');
@@ -119,10 +129,6 @@ function dropdowns(recipesData) {
             } else {
                 dropdown.classList.add('show');
                 chevronIcon.classList.add('rotate');
-                if (!dropdown.dataset.initialized) {
-                    generateDropdown(recipesData, type);
-                    dropdown.dataset.initialized = true;
-                }
             }
             isOpen = !isOpen;
         });
@@ -141,5 +147,6 @@ function searchClear() {
         searchInput.value = '';
         searchClear.style.display = 'none';
         displayRecipes(recipes, document.getElementById('recipes-container'));
+        updateDropdowns(recipes);
     });
 }
