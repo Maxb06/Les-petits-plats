@@ -11,27 +11,26 @@ export function searchRecipes(search, recipes) {
 
     for (let i = 0; i < recipes.length; i++) {
         let recipe = recipes[i];
-        let found = false;
 
+        // Verifie le titre
         if (recipe.name.toLowerCase().indexOf(search) !== -1) {
-            found = true;
-        } else {
-            for (let j = 0; j < recipe.ingredients.length; j++) {
-                if (recipe.ingredients[j].ingredient.toLowerCase().indexOf(search) !== -1) {
-                    found = true;
-                    break;
-                }
+            results.push(recipe);
+            continue; // passe à la prochaine recette
+        }
+
+        // Verifie les ingrédient
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+            if (recipe.ingredients[j].ingredient.toLowerCase().indexOf(search) !== -1) {
+                results.push(recipe);
+                continue;
             }
         }
 
-        if (!found && recipe.description.toLowerCase().indexOf(search) !== -1) {
-            found = true;
-        }
-
-        if (found) {
+        // Verifie la description
+        if (recipe.description.toLowerCase().indexOf(search) !== -1) {
             results.push(recipe);
         }
     }
-
+    
     return results;
 }
