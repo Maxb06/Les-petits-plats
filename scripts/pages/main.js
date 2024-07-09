@@ -62,6 +62,7 @@ function searchInput(event, recipesData, container) {
     if (searchTerm.length < 3) {
         displayRecipes(recipesData, container);
         updateDropdowns(recipesData);
+        updateTotalRecipes(recipesData.length);
         return;
     }
 
@@ -69,9 +70,13 @@ function searchInput(event, recipesData, container) {
 
     if (results.length === 0) {
         noResultsMessage(container, searchTerm);
+        updateDropdowns([]);
+        updateTotalRecipes(0);
+        
     } else {
         displayRecipes(results, container);
         updateDropdowns(results);
+        updateTotalRecipes(results.length);
     }
 }
 
@@ -121,7 +126,6 @@ function dropdowns(recipesData) {
                 }
             });
 
-            // Gere l'ouverture/fermeture du dropdown actuel
             const chevronIcon = toggle.querySelector('i');
             if (isOpen) {
                 dropdown.classList.remove('show');
