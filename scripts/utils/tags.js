@@ -109,10 +109,14 @@ function removeTag(tag, type, tagElement) {
     updateDropdowns(filteredRecipes);
 }
 
+/**
+ * Function to update the items displayed in the dropdowns based on the filtered recipes.
+ *
+ * @param {Array} filteredRecipes - The array of filtered recipe objects to use for updating the dropdowns.
+ */
 export function updateDropdowns(filteredRecipes) {
     ['ingredients', 'appliances', 'ustensils'].forEach(type => {
         const items = getItems(filteredRecipes, type);
         displayDropdown(type, items);
     });
 }
-

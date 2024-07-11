@@ -139,6 +139,11 @@ function dropdowns(recipesData) {
     });
 }
 
+/**
+ * Function to set up the clear button for the main search input.
+ * The clear button appears when there is text in the search input, and clicking it clears the input,
+ * resets the displayed recipes, and updates the dropdowns.
+ */
 function searchClear() {
     const searchInput = document.getElementById('search');
     const searchClear = document.getElementById('search-clear');

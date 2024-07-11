@@ -220,6 +220,7 @@ header img {
     cursor: pointer;
 }
 
+/* Media queries dropdowns */
 @media screen and (max-width: 993px) {
     #search {
         width: 100%;
