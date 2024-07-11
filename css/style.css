@@ -113,10 +113,13 @@ header img {
 
 .dropdown i {
     margin-left: 60px;
+}
+
+.rotate {
     transition: transform 0.3s ease;
 }
 
-.dropdown i.rotate {
+.rotate-180 {
     transform: rotate(180deg);
 }
 
@@ -140,7 +143,7 @@ header img {
     -ms-overflow-style: none;  /* IE & Edge */
     scrollbar-width: none;  /* Firefox */  
     padding-top: 0; 
-    padding-bottom: 0;
+    padding-bottom: 0; 
 }
 
 .dropdown-menu .search-text {
@@ -191,6 +194,13 @@ header img {
 .dropdown-item:active {
     font-weight: 700;
     color: #1B1B1B;
+}
+
+.closeButton:active {
+    background-image: url('../assets/img/closeButton.png');
+    background-size:1.1rem;
+    background-repeat: no-repeat;
+    background-position: 90%;
 }
 
 .show {
@@ -307,7 +317,7 @@ header img {
     margin-bottom: 30px;
     color: #1B1B1B;
     font-family: manrope;
-    transition: max-height 500ms ease;
+    transition: max-height 0.8s ease;
 }
 
 .card-text:hover {

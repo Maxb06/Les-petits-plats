@@ -20,7 +20,7 @@ async function init() {
 
     document.getElementById('search').addEventListener('input', (event) => searchInput(event, recipesData, recipesContainer));
 
-    dropdowns(recipesData);
+    setupDropdowns(recipesData);
 }
 
 /**
@@ -94,11 +94,36 @@ function noResultsMessage(container, searchTerm) {
 }
 
 /**
+ * Function to handle dropdown toggle click.
+ *
+ * @param {HTMLElement} toggle - The dropdown toggle element.
+ * @param {HTMLElement} dropdown - The dropdown element.
+ * @param {Array} dropdownToggles - Array of all dropdown toggle information.
+ */
+function dropdownToggleClick(toggle, dropdown, dropdownToggles) {
+    dropdownToggles.forEach(({ dropdownId: otherDropdownId }) => {
+        if (dropdown.id !== otherDropdownId) {
+            const otherDropdown = document.getElementById(otherDropdownId);
+            const otherChevronIcon = document.querySelector(`#${otherDropdownId}Toggle i`);
+            otherDropdown.classList.remove('show');
+            if (otherChevronIcon) {
+                otherChevronIcon.classList.remove('rotate-180');
+            }
+            otherDropdown.dataset.initialized = false;
+        }
+    });
+
+    dropdown.classList.toggle('show');
+    const chevronIcon = toggle.querySelector('i');
+    chevronIcon.classList.toggle('rotate-180');
+}
+
+/**
  * Function to set up dropdown event listeners for the specified types.
  *
  * @param {Array} recipesData - The array of recipe objects.
  */
-function dropdowns(recipesData) {
+function setupDropdowns(recipesData) {
     const dropdownToggles = [
         { toggleId: 'ingredientDropdownToggle', dropdownId: 'ingredientsDropdown', type: 'ingredients' },
         { toggleId: 'applianceDropdownToggle', dropdownId: 'appliancesDropdown', type: 'appliances' },
@@ -108,7 +133,6 @@ function dropdowns(recipesData) {
     dropdownToggles.forEach(({ toggleId, dropdownId, type }) => {
         const toggle = document.getElementById(toggleId);
         const dropdown = document.getElementById(dropdownId);
-        let isOpen = false;
 
         // Initialise les dropdowns une seule fois au chargement de la page
         if (!dropdown.dataset.initialized) {
@@ -116,27 +140,11 @@ function dropdowns(recipesData) {
             dropdown.dataset.initialized = true;
         }
 
-        toggle.addEventListener('click', () => {
-            // Ferme les autres dropdowns
-            dropdownToggles.forEach(({ dropdownId: otherDropdownId }) => {
-                if (dropdownId !== otherDropdownId) {
-                    const otherDropdown = document.getElementById(otherDropdownId);
-                    otherDropdown.classList.remove('show');
-                    otherDropdown.dataset.initialized = false;
-                }
-            });
-
-            const chevronIcon = toggle.querySelector('i');
-            if (isOpen) {
-                dropdown.classList.remove('show');
-                chevronIcon.classList.remove('rotate');
-            } else {
-                dropdown.classList.add('show');
-                chevronIcon.classList.add('rotate');
-            }
-            isOpen = !isOpen;
-        });
+        toggle.addEventListener('click', () => dropdownToggleClick(toggle, dropdown, dropdownToggles));
     });
+
+    // Ferme les dropdowns au clic à l'exterieur
+    document.addEventListener('click', (event) => closeDropdowns(event, dropdownToggles));
 }
 
 /**
@@ -157,5 +165,27 @@ function searchClear() {
         searchClear.style.display = 'none';
         displayRecipes(recipes, document.getElementById('recipes-container'));
         updateDropdowns(recipes);
+    });
+}
+
+/**
+ * Function to close all dropdowns when clicking outside.
+ *
+ * @param {Event} event - The click event.
+ * @param {Array} dropdownToggles - Array of all dropdown toggle information.
+ */
+function closeDropdowns(event, dropdownToggles) {
+    dropdownToggles.forEach(({ toggleId, dropdownId }) => {
+        const toggle = document.getElementById(toggleId);
+        const dropdown = document.getElementById(dropdownId);
+
+        if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
+            dropdown.classList.remove('show');
+            const chevronIcon = toggle.querySelector('i');
+            if (chevronIcon) {
+                chevronIcon.classList.remove('rotate-180');
+            }
+            dropdown.dataset.initialized = false;
+        }
     });
 }

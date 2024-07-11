@@ -39,6 +39,7 @@ export function displayDropdown(type, items) {
         const listItem = document.createElement('div');
         listItem.textContent = item;
         listItem.classList.add('dropdown-item');
+        listItem.classList.add('closeButton');
         listItem.dataset.tag = item.toLowerCase();
         listItem.dataset.type = type;
         listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
