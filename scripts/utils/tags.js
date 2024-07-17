@@ -1,5 +1,5 @@
 import { displayDropdown } from '../utils/dropdown.js';
-import { displayRecipes } from '../pages/main.js';
+import { search } from '../utils/filter.js';
 
 /**
  * Function to get unique items from the recipes based on the type.
@@ -19,7 +19,7 @@ function getItems(recipes, type) {
         items = recipes.flatMap(recipe => recipe.ustensils);
     }
 
-    // Filtre les doublons
+    // filtre les doublons
     return [...new Set(items)];
 }
 
@@ -50,10 +50,11 @@ export function selectTag(event, recipesData, container) {
         addTag(tag, type);
     }
 
-    const filteredRecipes = filterRecipes(recipesData, window.selectedTags);
+    const dropdownItems = event.target.parentElement.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => item.classList.remove('selected'));
+    event.target.classList.add('selected');
 
-    displayRecipes(filteredRecipes, container);
-    updateDropdowns(filteredRecipes);
+    search({ target: { value: document.getElementById('search').value } }, recipesData, container);
 }
 
 /**
@@ -63,7 +64,7 @@ export function selectTag(event, recipesData, container) {
  * @param {Object} selectedTags - The selected tags for each type.
  * @returns {Array} The array of filtered recipe objects.
  */
-function filterRecipes(recipes, selectedTags) {
+export function filterRecipes(recipes, selectedTags) {
     return recipes.filter(recipe => {
         return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
                selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
@@ -100,13 +101,24 @@ function addTag(tag, type) {
  * @param {string} type - The type of the tag (ingredients, appliances, ustensils).
  * @param {HTMLElement} tagElement - The tag element to remove from the DOM.
  */
-function removeTag(tag, type, tagElement) {
+export function removeTag(tag, type, tagElement) {
     window.selectedTags[type] = window.selectedTags[type].filter(t => t !== tag);
     tagElement.remove();
 
-    const filteredRecipes = filterRecipes(window.recipes, window.selectedTags);
-    displayRecipes(filteredRecipes, document.getElementById('recipes-container'));
+    const dropdownItem = document.querySelector(`.dropdown-item[data-tag="${tag}"][data-type="${type}"]`);
+    if (dropdownItem) {
+        dropdownItem.classList.remove('selected');
+        const icon = dropdownItem.querySelector('.close-icon');
+        if (icon) {
+            icon.remove();
+        }
+    }
+
+    const allRecipes = window.recipes;
+    const filteredRecipes = filterRecipes(allRecipes, window.selectedTags);
     updateDropdowns(filteredRecipes);
+
+    search({ target: { value: document.getElementById('search').value } }, window.recipes, document.getElementById('recipes-container'));
 }
 
 /**
