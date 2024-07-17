@@ -132,7 +132,9 @@ header img {
     font-size: 21px;
 }
 
-.dropdown-menu {
+#ingredientsDropdown,
+#appliancesDropdown,
+#ustensilsDropdown {
     border: none;
     border-bottom-left-radius: 11px;
     border-bottom-right-radius: 11px;
@@ -142,8 +144,8 @@ header img {
     overflow-x: hidden;
     -ms-overflow-style: none;  /* IE & Edge */
     scrollbar-width: none;  /* Firefox */  
-    padding-top: 0; 
-    padding-bottom: 0; 
+    padding: 0;
+    margin-top: -10px; 
 }
 
 .dropdown-menu .search-text {
@@ -185,6 +187,7 @@ header img {
     height: 37px;
     display: flex;
     align-items: center;
+    border: 1px solid white;
 }
 
 .dropdown-item:hover {
@@ -196,16 +199,24 @@ header img {
     color: #1B1B1B;
 }
 
-.closeButton:active {
-    background-image: url('../assets/img/closeButton.png');
-    background-size:1.1rem;
-    background-repeat: no-repeat;
-    background-position: 90%;
+.dropdown-item.selected {
+    font-weight: 700;
+    background-color: #FFD15B;
+    color: #1B1B1B;
+    position: relative;
 }
 
-.show {
-    margin-top: -10px;
+.close-icon {
+    background-image: url('../assets/img/closeButton.png');
+    background-size: 1.1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+    margin-left: auto;
 }
+
 
 #tags-container {
     display: flex;
