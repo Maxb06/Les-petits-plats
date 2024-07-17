@@ -1,6 +1,6 @@
 import { recipes } from '../../data/recipes.js';
 import { templateRecipe } from '../templates/recipeCard.js';
-import { searchRecipes } from '../utils/searchBar.js';
+import { search } from '../utils/filter.js';
 import { generateDropdown, updateDropdowns } from '../utils/tags.js';
 
 document.addEventListener('DOMContentLoaded', init);
@@ -18,7 +18,7 @@ async function init() {
     searchClear();
     displayRecipes(recipesData, recipesContainer);
 
-    document.getElementById('search').addEventListener('input', (event) => searchInput(event, recipesData, recipesContainer));
+    document.getElementById('search').addEventListener('input', (event) => search(event, recipesData, recipesContainer));
 
     setupDropdowns(recipesData);
 }
@@ -44,7 +44,7 @@ export function displayRecipes(recipes, container) {
  *
  * @param {number} total - The total number of recipes.
  */
-function updateTotalRecipes(total) {
+export function updateTotalRecipes(total) {
     const totalRecipesElement = document.getElementById('totalRecipes');
     totalRecipesElement.textContent = `${total} recettes`;
 }
@@ -55,7 +55,7 @@ function updateTotalRecipes(total) {
  * @param {Event} event - The input event triggered by the search field.
  * @param {Array} recipesData - The array of recipe objects to search within.
  * @param {HTMLElement} container - The HTML element where the search results will be displayed.
- */
+ *//*
 function searchInput(event, recipesData, container) {
     const searchTerm = event.target.value;
 
@@ -78,7 +78,7 @@ function searchInput(event, recipesData, container) {
         updateDropdowns(results);
         updateTotalRecipes(results.length);
     }
-}
+}*/
 
 /**
  * Function to display a message when no search results are found.
@@ -86,7 +86,7 @@ function searchInput(event, recipesData, container) {
  * @param {HTMLElement} container - The HTML element where the message will be displayed.
  * @param {string} searchTerm - The search term entered by the user.
  */
-function noResultsMessage(container, searchTerm) {
+export function noResultsMessage(container, searchTerm) {
     container.innerHTML = '';
     const message = document.createElement('p');
     message.textContent = `Aucune recette ne contient '${searchTerm}', vous pouvez chercher 'tarte aux pommes', 'poisson', etc.`;
@@ -142,7 +142,6 @@ function setupDropdowns(recipesData) {
 
         toggle.addEventListener('click', () => dropdownToggleClick(toggle, dropdown, dropdownToggles));
     });
-
     // Ferme les dropdowns au clic à l'exterieur
     document.addEventListener('click', (event) => closeDropdowns(event, dropdownToggles));
 }
