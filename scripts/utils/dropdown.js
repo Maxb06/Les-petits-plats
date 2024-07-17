@@ -1,4 +1,4 @@
-import { selectTag } from '../utils/tags.js';
+import { selectTag, removeTag } from '../utils/tags.js';
 
 /**
  * function for displaying dropdown
@@ -39,14 +39,26 @@ export function displayDropdown(type, items) {
         const listItem = document.createElement('div');
         listItem.textContent = item;
         listItem.classList.add('dropdown-item');
-        listItem.classList.add('closeButton');
         listItem.dataset.tag = item.toLowerCase();
         listItem.dataset.type = type;
+
+        if (window.selectedTags[type].includes(item.toLowerCase())) {
+            listItem.classList.add('selected');
+            const closeIcon = document.createElement('div');
+            closeIcon.classList.add('close-icon');
+            closeIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const tagElement = document.querySelector(`.tag[data-tag="${item.toLowerCase()}"][data-type="${type}"]`);
+                removeTag(item.toLowerCase(), type, tagElement);
+            });
+            listItem.appendChild(closeIcon);
+        }
+
         listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
         listContainer.appendChild(listItem);
     });
 
-    searchBar.addEventListener('input', (event) => filterDropdownItems(event, items, listContainer));
+    searchBar.addEventListener('input', (event) => filterDropdownItems(event, items, listContainer, type));
 
     searchBar.addEventListener('input', () => {
         searchClear.style.display = searchBar.value ? 'inline' : 'none';
@@ -65,8 +77,9 @@ export function displayDropdown(type, items) {
  * @param {Event} event - The input event triggered by the search field.
  * @param {Array} items - The array of items to filter.
  * @param {HTMLElement} listContainer - The container element where the filtered items will be displayed.
+ * @param {string} type - The type of the dropdown (ingredients, appliances, ustensils).
  */
-function filterDropdownItems(event, items, listContainer) {
+function filterDropdownItems(event, items, listContainer, type) {
     const searchTerm = event.target.value.toLowerCase();
 
     listContainer.innerHTML = '';
@@ -77,7 +90,12 @@ function filterDropdownItems(event, items, listContainer) {
             listItem.textContent = item;
             listItem.classList.add('dropdown-item');
             listItem.dataset.tag = item.toLowerCase();
-            listItem.dataset.type = event.target.id.replace('Search', '');
+            listItem.dataset.type = type;
+
+            if (window.selectedTags[type].includes(item.toLowerCase())) {
+                listItem.classList.add('selected');
+            }
+
             listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
             listContainer.appendChild(listItem);
         });
@@ -91,7 +109,12 @@ function filterDropdownItems(event, items, listContainer) {
         listItem.textContent = item;
         listItem.classList.add('dropdown-item');
         listItem.dataset.tag = item.toLowerCase();
-        listItem.dataset.type = event.target.id.replace('Search', '');
+        listItem.dataset.type = type;
+
+        if (window.selectedTags[type].includes(item.toLowerCase())) {
+            listItem.classList.add('selected');
+        }
+
         listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
         listContainer.appendChild(listItem);
     });
