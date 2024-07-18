@@ -10,6 +10,7 @@ import { searchRecipes } from './searchBar.js';
  * @returns {Array} The array of filtered recipe objects.
  */
 export function filterRecipes(recipes, selectedTags) {
+    console.log(selectedTags);
     return recipes.filter(recipe => {
         return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
             selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
@@ -23,7 +24,7 @@ export function filterRecipes(recipes, selectedTags) {
  * @param {Event} event - The input event triggered by the search field.
  * @param {Array} recipesData - The array of recipe objects to search within.
  * @param {HTMLElement} container - The HTML element where the search results will be displayed.
- */
+ *//*
 export function combinedSearch(event, recipesData, container) {
     const searchTerm = event.target.value.toLowerCase();
     let filteredRecipes = searchTerm.length >= 3 ? searchRecipes(searchTerm, recipesData) : recipesData;
@@ -42,13 +43,13 @@ export function combinedSearch(event, recipesData, container) {
         updateTotalRecipes(filteredRecipes.length);
     }
 }
+*/
 
-/*
-export function search(event, recipesData, selectedTags, container) {
+export function combinedSearch(event, recipesData, container) {
     const searchTerm = event.target.value.toLowerCase();
-    const filteredRecipes = searchTerm.length >= 3 ? searchRecipes(searchTerm, recipesData) : recipesData;
+    let filteredRecipes = searchTerm.length >= 3 ? searchRecipes(searchTerm, recipesData) : recipesData;
 
-    filteredRecipes = filterRecipes(filteredRecipes, selectedTags);
+    filteredRecipes = filterRecipes(filteredRecipes, window.selectedTags);
 
     if (filteredRecipes.length === 0) {
         noResultsMessage(container, searchTerm);
@@ -60,4 +61,4 @@ export function search(event, recipesData, selectedTags, container) {
         updateTotalRecipes(filteredRecipes.length);
     }
 }
-    */
+    
