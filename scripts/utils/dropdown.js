@@ -54,7 +54,10 @@ export function displayDropdown(type, items) {
             listItem.appendChild(closeIcon);
         }
 
-        listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
+        listItem.addEventListener('click', (event) => {
+            selectTag(event, window.recipes, document.getElementById('recipes-container'));
+            event.stopPropagation();
+        });
         listContainer.appendChild(listItem);
     });
 
@@ -64,10 +67,11 @@ export function displayDropdown(type, items) {
         searchClear.style.display = searchBar.value ? 'inline' : 'none';
     });
 
-    searchClear.addEventListener('click', () => {
+    searchClear.addEventListener('click', (event) => {
         searchBar.value = '';
         searchClear.style.display = 'none';
         displayDropdown(type, items);
+        event.stopPropagation();
     });
 }
 
@@ -96,7 +100,10 @@ function filterDropdownItems(event, items, listContainer, type) {
                 listItem.classList.add('selected');
             }
 
-            listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
+            listItem.addEventListener('click', (event) => {
+                selectTag(event, window.recipes, document.getElementById('recipes-container'));
+                event.stopPropagation();
+            });
             listContainer.appendChild(listItem);
         });
         return;
@@ -115,7 +122,10 @@ function filterDropdownItems(event, items, listContainer, type) {
             listItem.classList.add('selected');
         }
 
-        listItem.addEventListener('click', (event) => selectTag(event, window.recipes, document.getElementById('recipes-container')));
+        listItem.addEventListener('click', (event) => {
+            selectTag(event, window.recipes, document.getElementById('recipes-container'));
+            event.stopPropagation();
+        });
         listContainer.appendChild(listItem);
     });
 }
