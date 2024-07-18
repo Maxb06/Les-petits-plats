@@ -19,32 +19,12 @@ export function filterRecipes(recipes, selectedTags) {
 }
 
 /**
- * Function combine search and filter by tags.
+ * Function that combines filters search and tags.
  *
  * @param {Event} event - The input event triggered by the search field.
  * @param {Array} recipesData - The array of recipe objects to search within.
  * @param {HTMLElement} container - The HTML element where the search results will be displayed.
- *//*
-export function combinedSearch(event, recipesData, container) {
-    const searchTerm = event.target.value.toLowerCase();
-    let filteredRecipes = searchTerm.length >= 3 ? searchRecipes(searchTerm, recipesData) : recipesData;
-
-    if (Object.values(window.selectedTags).some(tags => tags.length > 0)) {
-        filteredRecipes = filterRecipes(filteredRecipes, window.selectedTags);
-    }
-
-    if (filteredRecipes.length === 0) {
-        noResultsMessage(container, searchTerm);
-        updateDropdowns([]);
-        updateTotalRecipes(0);
-    } else {
-        displayRecipes(filteredRecipes, container);
-        updateDropdowns(filteredRecipes);
-        updateTotalRecipes(filteredRecipes.length);
-    }
-}
-*/
-
+ */
 export function combinedSearch(event, recipesData, container) {
     const searchTerm = event.target.value.toLowerCase();
     let filteredRecipes = searchTerm.length >= 3 ? searchRecipes(searchTerm, recipesData) : recipesData;

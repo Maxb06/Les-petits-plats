@@ -154,34 +154,3 @@ function closeDropdowns(event, dropdownToggles) {
         }
     });
 }
-
-/**
- * Function to handle the search input event, filter recipes, and display results.
- *
- * @param {Event} event - The input event triggered by the search field.
- * @param {Array} recipesData - The array of recipe objects to search within.
- * @param {HTMLElement} container - The HTML element where the search results will be displayed.
- *//*
-function searchInput(event, recipesData, container) {
-    const searchTerm = event.target.value;
-
-    if (searchTerm.length < 3) {
-        displayRecipes(recipesData, container);
-        updateDropdowns(recipesData);
-        updateTotalRecipes(recipesData.length);
-        return;
-    }
-
-    const results = searchRecipes(searchTerm, recipesData);
-
-    if (results.length === 0) {
-        noResultsMessage(container, searchTerm);
-        updateDropdowns([]);
-        updateTotalRecipes(0);
-        
-    } else {
-        displayRecipes(results, container);
-        updateDropdowns(results);
-        updateTotalRecipes(results.length);
-    }
-}*/
