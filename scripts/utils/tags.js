@@ -1,5 +1,5 @@
 import { displayDropdown } from '../utils/dropdown.js';
-import { search } from '../utils/filter.js';
+import { combinedSearch, filterRecipes } from '../utils/filter.js';
 
 /**
  * Function to get unique items from the recipes based on the type.
@@ -18,7 +18,7 @@ function getItems(recipes, type) {
     } else if (type === 'ustensils') {
         items = recipes.flatMap(recipe => recipe.ustensils);
     }
-    // filtre les doublons
+    
     return [...new Set(items)];
 }
 
@@ -53,22 +53,7 @@ export function selectTag(event, recipesData, container) {
     dropdownItems.forEach(item => item.classList.remove('selected'));
     event.target.classList.add('selected');
 
-    search({ target: { value: document.getElementById('search').value } }, recipesData, container);
-}
-
-/**
- * Function to filter recipes based on selected tags.
- *
- * @param {Array} recipes - The array of recipe objects.
- * @param {Object} selectedTags - The selected tags for each type.
- * @returns {Array} The array of filtered recipe objects.
- */
-export function filterRecipes(recipes, selectedTags) {
-    return recipes.filter(recipe => {
-        return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
-            selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
-            selectedTags.ustensils.every(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
-    });
+    combinedSearch({ target: { value: document.getElementById('search').value } }, recipesData, container);
 }
 
 /**
@@ -117,7 +102,7 @@ export function removeTag(tag, type, tagElement) {
     const filteredRecipes = filterRecipes(allRecipes, window.selectedTags);
     updateDropdowns(filteredRecipes);
 
-    search({ target: { value: document.getElementById('search').value } }, window.recipes, document.getElementById('recipes-container'));
+    combinedSearch({ target: { value: document.getElementById('search').value } }, window.recipes, document.getElementById('recipes-container'));
 }
 
 /**

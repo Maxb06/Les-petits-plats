@@ -1,6 +1,6 @@
 import { recipes } from '../../data/recipes.js';
 import { templateRecipe } from '../templates/recipeCard.js';
-import { search } from '../utils/filter.js';
+import { combinedSearch } from '../utils/filter.js';
 import { generateDropdown, updateDropdowns } from '../utils/tags.js';
 
 document.addEventListener('DOMContentLoaded', init);
@@ -18,7 +18,7 @@ async function init() {
     searchClear();
     displayRecipes(recipesData, recipesContainer);
 
-    document.getElementById('search').addEventListener('input', (event) => search(event, recipesData, recipesContainer));
+    document.getElementById('search').addEventListener('input', (event) => combinedSearch(event, recipesData, recipesContainer));
 
     setupDropdowns(recipesData);
 }
@@ -50,37 +50,6 @@ export function updateTotalRecipes(total) {
 }
 
 /**
- * Function to handle the search input event, filter recipes, and display results.
- *
- * @param {Event} event - The input event triggered by the search field.
- * @param {Array} recipesData - The array of recipe objects to search within.
- * @param {HTMLElement} container - The HTML element where the search results will be displayed.
- *//*
-function searchInput(event, recipesData, container) {
-    const searchTerm = event.target.value;
-
-    if (searchTerm.length < 3) {
-        displayRecipes(recipesData, container);
-        updateDropdowns(recipesData);
-        updateTotalRecipes(recipesData.length);
-        return;
-    }
-
-    const results = searchRecipes(searchTerm, recipesData);
-
-    if (results.length === 0) {
-        noResultsMessage(container, searchTerm);
-        updateDropdowns([]);
-        updateTotalRecipes(0);
-        
-    } else {
-        displayRecipes(results, container);
-        updateDropdowns(results);
-        updateTotalRecipes(results.length);
-    }
-}*/
-
-/**
  * Function to display a message when no search results are found.
  *
  * @param {HTMLElement} container - The HTML element where the message will be displayed.
@@ -109,7 +78,6 @@ function dropdownToggleClick(toggle, dropdown, dropdownToggles) {
             if (otherChevronIcon) {
                 otherChevronIcon.classList.remove('rotate-180');
             }
-            otherDropdown.dataset.initialized = false;
         }
     });
 
@@ -134,7 +102,6 @@ function setupDropdowns(recipesData) {
         const toggle = document.getElementById(toggleId);
         const dropdown = document.getElementById(dropdownId);
 
-        // Initialise les dropdowns une seule fois au chargement de la page
         if (!dropdown.dataset.initialized) {
             generateDropdown(recipesData, type);
             dropdown.dataset.initialized = true;
@@ -142,7 +109,7 @@ function setupDropdowns(recipesData) {
 
         toggle.addEventListener('click', () => dropdownToggleClick(toggle, dropdown, dropdownToggles));
     });
-    // Ferme les dropdowns au clic à l'exterieur
+  
     document.addEventListener('click', (event) => closeDropdowns(event, dropdownToggles));
 }
 
@@ -184,7 +151,37 @@ function closeDropdowns(event, dropdownToggles) {
             if (chevronIcon) {
                 chevronIcon.classList.remove('rotate-180');
             }
-            dropdown.dataset.initialized = false;
         }
     });
 }
+
+/**
+ * Function to handle the search input event, filter recipes, and display results.
+ *
+ * @param {Event} event - The input event triggered by the search field.
+ * @param {Array} recipesData - The array of recipe objects to search within.
+ * @param {HTMLElement} container - The HTML element where the search results will be displayed.
+ *//*
+function searchInput(event, recipesData, container) {
+    const searchTerm = event.target.value;
+
+    if (searchTerm.length < 3) {
+        displayRecipes(recipesData, container);
+        updateDropdowns(recipesData);
+        updateTotalRecipes(recipesData.length);
+        return;
+    }
+
+    const results = searchRecipes(searchTerm, recipesData);
+
+    if (results.length === 0) {
+        noResultsMessage(container, searchTerm);
+        updateDropdowns([]);
+        updateTotalRecipes(0);
+        
+    } else {
+        displayRecipes(results, container);
+        updateDropdowns(results);
+        updateTotalRecipes(results.length);
+    }
+}*/
