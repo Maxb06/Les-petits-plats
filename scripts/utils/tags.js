@@ -18,7 +18,6 @@ function getItems(recipes, type) {
     } else if (type === 'ustensils') {
         items = recipes.flatMap(recipe => recipe.ustensils);
     }
-
     // filtre les doublons
     return [...new Set(items)];
 }
@@ -67,8 +66,8 @@ export function selectTag(event, recipesData, container) {
 export function filterRecipes(recipes, selectedTags) {
     return recipes.filter(recipe => {
         return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
-               selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
-               selectedTags.ustensils.every(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
+            selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&
+            selectedTags.ustensils.every(tag => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag)));
     });
 }
 
