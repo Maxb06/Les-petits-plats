@@ -10,7 +10,6 @@ import { searchRecipes } from './searchBar.js';
  * @returns {Array} The array of filtered recipe objects.
  */
 export function filterRecipes(recipes, selectedTags) {
-    console.log(selectedTags);
     return recipes.filter(recipe => {
         return selectedTags.ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))) &&
             selectedTags.appliances.every(tag => recipe.appliance.toLowerCase().includes(tag)) &&

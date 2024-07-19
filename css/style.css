@@ -137,13 +137,22 @@ header img {
     border-bottom-left-radius: 11px;
     border-bottom-right-radius: 11px;
     width: 195px;
-    max-height: 315px;
+    max-height: 1px;
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;  /* IE & Edge */
     scrollbar-width: none;  /* Firefox */  
     padding: 0;
     margin-top: -10px;
+    transition: all 0.3s;
+    display: block;
+    visibility: hidden;
+}
+
+.dropdown-menu.show{
+    display: block;
+    max-height: 315px;
+    visibility: visible;    
 }
 
 .dropdown-menu .search-text {
