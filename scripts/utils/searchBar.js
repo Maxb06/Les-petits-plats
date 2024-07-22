@@ -7,6 +7,7 @@
  */
 export function searchRecipes(search, recipes) {
     let results = [];
+    let resultsIndex = 0;
     search = search.toLowerCase();
 
     for (let i = 0; i < recipes.length; i++) {
@@ -14,21 +15,25 @@ export function searchRecipes(search, recipes) {
 
         // Verifie le titre
         if (recipe.name.toLowerCase().indexOf(search) !== -1) {
-            results.push(recipe);
-            continue; // passe à la prochaine recette
-        }
-
-        // Verifie les ingrédient
-        for (let j = 0; j < recipe.ingredients.length; j++) {
-            if (recipe.ingredients[j].ingredient.toLowerCase().indexOf(search) !== -1) {
-                results.push(recipe);
-                continue;
-            }
+            results[resultsIndex] = recipe;
+            resultsIndex++;
+            continue;
         }
 
         // Verifie la description
-        if (recipe.description.toLowerCase().indexOf(search) !== -1) {
-            results.push(recipe);
+        else if (recipe.description.toLowerCase().indexOf(search) !== -1) {
+            results[resultsIndex] = recipe;
+            resultsIndex++; 
+            continue; 
+        }
+
+        // Verifie les ingrédients
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+            if (recipe.ingredients[j].ingredient.toLowerCase().indexOf(search) !== -1) {
+                results[resultsIndex] = recipe;
+                resultsIndex++; 
+                break; 
+            }
         }
     }
     
